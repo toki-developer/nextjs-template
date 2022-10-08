@@ -1,12 +1,17 @@
 {
-  "name": "mint-site",
+  "name": "nextjs-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "run-p dev:*",
+    "dev:next": "next dev",
+    "dev:path": "pathpida --enableStatic --output src/libs/path --watch",
+    "build": "pathpida --enableStatic --output src/libs/path && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "next": "12.3.1",
@@ -17,8 +22,29 @@
     "@types/node": "18.8.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
-    "eslint": "8.25.0",
+    "@typescript-eslint/eslint-plugin": "5.33.0",
+    "@typescript-eslint/parser": "5.33.0",
+    "eslint": "^8.25.0",
     "eslint-config-next": "12.3.1",
-    "typescript": "4.8.4"
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import-access": "^1.0.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-sort-destructure-keys": "^1.4.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "pathpida": "^0.18.1",
+    "prettier": "^2.7.1",
+    "typescript": "4.7.4"
+  },
+  "lint-staged": {
+    "*.{ts,tsx, js, jsx}": [
+      "bash -c 'yarn check-types'",
+      "yarn lint:fix",
+      "yarn format"
+    ],
+    "**/*.{json,md,css,html,yml,yaml}": [
+      "prettier --write ."
+    ]
   }
 }

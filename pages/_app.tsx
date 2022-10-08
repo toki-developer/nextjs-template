@@ -1,8 +1,17 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppPropsWithLayout } from "next/app";
+import Head from "next/head";
+import type { ReactElement } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
+  return (
+    <>
+      <Head>
+        <title>sample</title>
+      </Head>
+      {getLayout(<Component {...pageProps} />)}
+    </>
+  );
+};
 
-export default MyApp
+export default App;
