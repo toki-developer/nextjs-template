@@ -38,7 +38,6 @@ module.exports = {
 
     // sort
     "import/newline-after-import": "error",
-    "import/no-default-export": "error",
     "import-access/jsdoc": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
@@ -64,7 +63,8 @@ module.exports = {
       },
       {
         selector: ["function", "method"],
-        format: ["camelCase"],
+        format: ["camelCase", "PascalCase"],
+        //パスカルケースとスネークケースの細かい設定後で(コンポーネント名の時にパスカルケースなど)
       },
       {
         selector: ["variable", "parameter"],
